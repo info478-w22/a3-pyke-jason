@@ -105,15 +105,20 @@ interpretation_page <- tabPanel(
   mainPanel(
     h3("Observations"),
     p("Both models visualize the fact that masking, social distancing, and 
-      quarintine guidelines help limit the spread of COVID-19. "),
-    p("In the stochastic 
+      quarintine guidelines help limit the spread of COVID-19. They also visualize the fact that
+      the Alpha variant is the least infectious variant, while Omicron is the most infectious."),
+    p("In the deterministic 
       model, I noticed that the number of infected people would eventually 
       converge to zero in every combination of options, but the differentiating 
       factor between options with regulations versus without regulations was the
       recovery line, which either shot up or remained fairly low."),
-    p(""),
+    p("In the stochastic model, it was interesting to look at the significant amount of variation
+      in the models with small sample size. As expected, the amount of variation decreased with higher
+      sample size, but with quarintine regulations, the amount of variation for the number of susceptible
+      people seemed to increase. This means that the variation of susceptible people was higher when there
+      is lower entry rate and action rate."),
   h4("Limitations"),
-    p("There are several limitations to this model. First of all, I assumed the 
+    p("There are several limitations to both models. First of all, I assumed the 
       same rates of action and exposure for the different types of regulation,
       which would not be the case for compact urban cities versus suburbs. Next, I
       assumed that there was only one variant present in the region, which in practice
