@@ -1,3 +1,5 @@
 # Assignment 3
 
-Start report for disease modelling 
+COVID-19 Disease modelling 
+
+[SHINYAPPS.IO LINK](https://github.com/info478-w22/a3-pyke-jason)
