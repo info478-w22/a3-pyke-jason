@@ -2,4 +2,4 @@
 
 COVID-19 Disease modelling 
 
-[SHINYAPPS.IO LINK](https://github.com/info478-w22/a3-pyke-jason)
+[SHINYAPPS.IO LINK](https://pykehouse.shinyapps.io/a3-pyke-jason/)
