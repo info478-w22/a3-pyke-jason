@@ -1,5 +1,5 @@
 introduction_page <- tabPanel(
-  titlePanel("Introduction"),
+  "Introduction",
   mainPanel(
     h3("COVID-19 Spread Interactive Models"),
     p("This Shiny app attempts to demonstrate how 
@@ -10,17 +10,17 @@ introduction_page <- tabPanel(
       a("Yale Medicine", 
         href="https://www.yalemedicine.org/news/covid-19-variants-of-concern-omicron"),
       " (accessed March 8 2022), and the quantitative effects of social distancing 
-      on the spread of COVID-19 were obtained from ", a("Daghiri and Ozmen 2021", 
+      on the spread of COVID-19 were obtained from ", a("Daghiri and Ozmen 2021.", 
                                                    href="https://pubmed.ncbi.nlm.nih.gov/34071047/"), 
-      ".Information regarding COVID-19 recovery and death rate was obtained from ",
-      a("WebMD", href="https://www.webmd.com/lung/covid-recovery-overview"), ".")
+      " Information regarding COVID-19 recovery and death rate was obtained from ",
+      a("WebMD.", href="https://www.webmd.com/lung/covid-recovery-overview"))
   )
 )
 
 variants <- c("Alpha" = "al", "Beta" = "be", "Delta AY.4.2*" = "de4", "Delta" = "de", "Omicron" = "om")
 regulations <- c("None" = "reg", "Masking & Social Distancing" = "dist", "Quarintine"= "quar")
 deterministic_model_page <- tabPanel(
-  titlePanel("Deterministic Model"),
+  "Deterministic Model",
   sidebarLayout(
     sidebarPanel(
       sliderInput(
@@ -50,17 +50,13 @@ deterministic_model_page <- tabPanel(
     ),
     mainPanel(
       h3("Deterministic Model"),
-      p("A map of various statistics of counties and states in the midwest, 
-        including education, poverty and diversity. ",
-        strong("Marker sizes are based on the amount of 
-        education/diversity/poverty per county/state. 
-        For counties, opacity also depends on this.")),
+      p("Here's a deterministic COVID-19 model for the different variants and regulations"),
       plotOutput("dcm_plot")
     )
   )
 )
 stochastic_model_page <- tabPanel(
-  titlePanel("Stochastic Model"),
+  "Stochastic Model",
   sidebarLayout(
     sidebarPanel(
       sliderInput(
@@ -90,18 +86,14 @@ stochastic_model_page <- tabPanel(
     ),
     mainPanel(
       h3("Stochastic Model - Individual Contact Model"),
-      p("A map of various statistics of counties and states in the midwest, 
-        including education, poverty and diversity. ",
-        strong("Marker sizes are based on the amount of 
-        education/diversity/poverty per county/state. 
-        For counties, opacity also depends on this.")),
+      p("Here's a stochastic COVID-19 model for the different variants and regulations"),
       plotOutput("icm_plot")
       
     )
   )
 )
 interpretation_page <- tabPanel(
-  titlePanel("Interpretation"),
+  "Interpretation",
   mainPanel(
     h3("Observations"),
     p("Both models visualize the fact that masking, social distancing, and 
@@ -127,7 +119,8 @@ interpretation_page <- tabPanel(
       infinite."),
 ))
 ui <- navbarPage(
-  "Education Diversity and Poverty",
+  theme = bs_theme(version = 4, bootswatch = "minty"),
+  "COVID-19 Models",
   introduction_page,
   deterministic_model_page,
   stochastic_model_page,
