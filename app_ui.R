@@ -2,26 +2,50 @@ introduction_page <- tabPanel(
   titlePanel("Introduction"),
   mainPanel(
     h3("COVID-19 Spread Interactive Models"),
-    p("A map of various statistics of counties and states in the midwest, 
-      including education, poverty and diversity. ",
-      strong("Marker sizes are based on the amount of 
-      education/diversity/poverty per county/state. 
-      For counties, opacity also depends on this."))
+    p("This Shiny app attempts to demonstrate how 
+    infectious the major variants of COVID are in 
+    different population sizes with different rules
+    and regulations. The infectivity rates of the 
+      different variants were obtained from",
+      a("Yale Medicine", 
+        href="https://www.yalemedicine.org/news/covid-19-variants-of-concern-omicron"),
+      " (accessed March 8 2022), and the quantitative effects of social distancing 
+      on the spread of COVID-19 were obtained from ", a("Daghiri and Ozmen 2021", 
+                                                   href="https://pubmed.ncbi.nlm.nih.gov/34071047/"), 
+      ".Information regarding COVID-19 recovery and death rate was obtained from ",
+      a("WebMD", href="https://www.webmd.com/lung/covid-recovery-overview"), ".")
   )
 )
+
+variants <- c("Alpha" = "al", "Beta" = "be", "Delta AY.4.2*" = "de4", "Delta" = "de", "Omicron" = "om")
+regulations <- c("None" = "reg", "Masking & Social Distancing" = "dist", "Quarintine"= "quar")
 deterministic_model_page <- tabPanel(
   titlePanel("Deterministic Model"),
   sidebarLayout(
     sidebarPanel(
-      selectInput(
-        inputId = "map_type",
-        label = "Statistics Area of Interest",
-        choices = c("Education", "Diversity", "Poverty")
+      sliderInput(
+        inputId = "d_pop",
+        label = "Initial Number Susceptible",
+        min = 100,
+        max = 100000,
+        value = 1000
+      ),
+      sliderInput(
+        inputId = "d_inf",
+        label = "Initial Number Infected",
+        min = 0,
+        max = 100000,
+        value = 10
       ),
       selectInput(
-        inputId = "scope",
-        label = "Scope",
-        choices = c("County", "State")
+        inputId = "d_reg",
+        label = "Regulations",
+        choices = regulations
+      ),
+      selectInput(
+        inputId = "d_var",
+        label = "Variant",
+        choices = variants
       )
     ),
     mainPanel(
@@ -39,15 +63,29 @@ stochastic_model_page <- tabPanel(
   titlePanel("Stochastic Model"),
   sidebarLayout(
     sidebarPanel(
-      selectInput(
-        inputId = "map_type",
-        label = "Statistics Area of Interest",
-        choices = c("Education", "Diversity", "Poverty")
+      sliderInput(
+        inputId = "s_pop",
+        label = "Initial Number Susceptible",
+        min = 10,
+        max = 100,
+        value = 50
+      ),
+      sliderInput(
+        inputId = "s_inf",
+        label = "Initial Number Infected",
+        min = 0,
+        max = 25,
+        value = 5
       ),
       selectInput(
-        inputId = "scope",
-        label = "Scope",
-        choices = c("County", "State")
+        inputId = "s_reg",
+        label = "Regulations",
+        choices = regulations
+      ),
+      selectInput(
+        inputId = "s_var",
+        label = "Variant",
+        choices = variants
       )
     ),
     mainPanel(
@@ -56,21 +94,33 @@ stochastic_model_page <- tabPanel(
         including education, poverty and diversity. ",
         strong("Marker sizes are based on the amount of 
         education/diversity/poverty per county/state. 
-        For counties, opacity also depends on this."))
+        For counties, opacity also depends on this.")),
+      plotOutput("icm_plot")
+      
     )
   )
 )
 interpretation_page <- tabPanel(
   titlePanel("Interpretation"),
   mainPanel(
-    h3("Interpretation of Models"),
-    p("A map of various statistics of counties and states in the midwest, 
-      including education, poverty and diversity. ",
-      strong("Marker sizes are based on the amount of 
-      education/diversity/poverty per county/state. 
-      For counties, opacity also depends on this."))
-  )
-)
+    h3("Observations"),
+    p("Both models visualize the fact that masking, social distancing, and 
+      quarintine guidelines help limit the spread of COVID-19. "),
+    p("In the stochastic 
+      model, I noticed that the number of infected people would eventually 
+      converge to zero in every combination of options, but the differentiating 
+      factor between options with regulations versus without regulations was the
+      recovery line, which either shot up or remained fairly low."),
+    p(""),
+  h4("Limitations"),
+    p("There are several limitations to this model. First of all, I assumed the 
+      same rates of action and exposure for the different types of regulation,
+      which would not be the case for compact urban cities versus suburbs. Next, I
+      assumed that there was only one variant present in the region, which in practice
+      would never be the case. Furthermore, the deterministic model is only valid
+      in the case of large populations, because it assumes the population size is
+      infinite."),
+))
 ui <- navbarPage(
   "Education Diversity and Poverty",
   introduction_page,
