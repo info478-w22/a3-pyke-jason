@@ -1,3 +1,5 @@
+library(bslib)
+
 introduction_page <- tabPanel(
   "Introduction",
   mainPanel(
@@ -120,7 +122,7 @@ interpretation_page <- tabPanel(
 ))
 ui <- navbarPage(
   theme = bs_theme(version = 4, bootswatch = "minty"),
-  "COVID-19 Models",
+  titlePanel("COVID-19 Models"),
   introduction_page,
   deterministic_model_page,
   stochastic_model_page,
